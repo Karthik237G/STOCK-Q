@@ -2,8 +2,8 @@ import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 # Download necessary NLTK resources
-nltk.download('vader_lexicon')
-
+nltk.download('vader_lexicon') #VADER utilizes a sentiment lexicon that contains over 7,500 lexical features, each assigned a valence score ranging from -4 (extremely negative) to +4 (extremely positive).
+ 
 
 def sentiment_analysis(text):
     # Create a SentimentIntensityAnalyzer object
