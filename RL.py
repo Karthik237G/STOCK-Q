@@ -28,3 +28,11 @@ class stockenv:
             done=False
         next_state=self.data.iloc[self.current_step].values
         return next_state,self.total_profit,done
+import tensorflow as tf
+class Rlagent:
+    def __init__(self):
+        pass
+    def act(self,state):
+        pass
+    def train(self,state,action,reward,next_state):
+        pass
