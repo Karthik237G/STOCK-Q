@@ -36,3 +36,14 @@ class Rlagent:
         pass
     def train(self,state,action,reward,next_state):
         pass
+env=stockenv(data)
+agent=Rlagent()
+for episode in range(100):
+    state=env.reset()
+    while True:
+        action=agent.act(state)
+        next_state,reward,done=env.step(action)
+        agent.train(state,action,reward,next_state)
+        state=next_state
+        if done:
+            break
