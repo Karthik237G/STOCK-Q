@@ -47,3 +47,6 @@ for episode in range(100):
         state=next_state
         if done:
             break
+stock=yf.Ticker('TCS.NS')
+data=stock.history(period='max')
+data=data.loc['2003-01-01':].copy()
