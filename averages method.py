@@ -56,3 +56,28 @@ df['RSI'] = 100 - (100 / (1 + rs))
 
 # Display the first few rows of the dataframe with Close and RSI
 df.tail()
+
+# Calculate True Range (TR)
+df['High-Low'] = df['High'] - df['Low']
+df['High-PC'] = abs(df['High'] - df['Close'].shift(1))
+df['Low-PC'] = abs(df['Low'] - df['Close'].shift(1))
+df['TR'] = df[['High-Low', 'High-PC', 'Low-PC']].max(axis=1)
+
+# Calculate Directional Movement (+DM and -DM)
+df['+DM'] = df['High'].diff()
+df['-DM'] = -df['Low'].diff()
+df['+DM'] = df['+DM'].where((df['+DM'] > df['-DM']) & (df['+DM'] > 0), 0)
+df['-DM'] = df['-DM'].where((df['-DM'] > df['+DM']) & (df['-DM'] > 0), 0)
+
+# Calculate Smoothed Averages
+period = 14
+df['ATR'] = df['TR'].rolling(window=period).mean()
+df['+DI'] = 100 * (df['+DM'].rolling(window=period).mean() / df['ATR'])
+df ['-DI'] = 100 * (df ['-DM'].rolling(window=period).mean() / df ['ATR'])
+
+# Calculate ADX
+df ['DX'] = 100 * (abs(df ['+DI'] - df ['-DI']) / (df ['+DI'] + df ['-DI']))
+df['ADX '] = df ['DX'].rolling(window=period).mean()
+
+df.tail()
+
